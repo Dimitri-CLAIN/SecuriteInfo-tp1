@@ -5,30 +5,12 @@
 //  Created by Clain Dimitri on 2022-02-15.
 //
 
-#include <iostream>
-#include <vector>
-#include <thread>
-
-void print(int n, const std::string &str)  {
-  std::string msg = std::to_string(n) + " : " + str;
-  std::cout << msg  << std::endl;
-}
+#include "DictionaryAttack.hpp"
 
 int main(int argc, const char * argv[]) {
-    std::vector<std::string> s = {
-        "Educative.blog",
-        "Educative",
-        "courses",
-        "are great"
-    };
-    std::vector<std::thread> threads;
-   
-    for (int i = 0; i < s.size(); i++) {
-      threads.push_back(std::thread(print, i, s[i]));
-    }
-
-    for (auto &th : threads) {
-      th.join();
-    }
+    DictionaryAttack dic("Hash.txt");
+    dic.startIntoThreads("Dictionary.txt", 10);
     return 0;
 }
+
+// https://www.bogotobogo.com/cplusplus/C11/1_C11_creating_thread.php
