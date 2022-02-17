@@ -79,6 +79,11 @@ void DictionaryAttack::startIntoThreads(const std::string dictionaryFile, int nb
             tmpVect.clear();
         }
     }
+    if (tmpVect.size()) {
+        threads.push_back(std::thread([this, tmpVect] { attack(tmpVect); }));
+        tmpVect.clear();
+    }
+        
     file.close();
 
     for (auto &th : threads) {

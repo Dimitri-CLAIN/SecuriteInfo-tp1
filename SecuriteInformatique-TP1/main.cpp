@@ -9,7 +9,7 @@
 
 int main(int argc, const char * argv[]) {
     DictionaryAttack dic("Hash.txt");
-    dic.startIntoThreads("Dictionary.txt", 10);
+    dic.startIntoThreads("Dictionary.txt", 1);
     return 0;
 }
 
