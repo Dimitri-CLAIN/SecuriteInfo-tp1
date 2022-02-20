@@ -15,7 +15,7 @@
 class DictionaryAttack {
 
 private:
-    std::vector<std::string> _hash;
+    std::vector<std::string> _hash; // Faire un 'tuple', string et bool liée. Quand on trouve le hash il passe en true. TODO
 
     static std::vector<std::string> readFile(const std::string filename);
     static std::string wordToHash(const std::string word);
