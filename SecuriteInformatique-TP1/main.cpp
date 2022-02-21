@@ -7,6 +7,7 @@
 
 #include "DictionaryAttack.hpp"
 #include <iostream>
+#include <thread>
 
 DictionaryAttack dic("Hash.txt");
 
@@ -26,13 +27,29 @@ void printAllKLengthRec(char set[], std::string prefix, int n, int k)
     }
 }
 
-int main( int argc, char **argv) {
+void exo2() {
     char set[44] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9','!','@','#','$','%','&','*'};
+//    char set[5] = {'a','b','c','d', '\0'};
     int k = int(std::strlen(set));
+    std::vector<std::thread> threads;
+
+    for (int i = 8; i >= 0;) {
+        if (threads.size() <= 5) {
+            threads.push_back(std::thread(&printAllKLengthRec, set, "", k, i));
+            i--;
+        }
+    }
+    for (auto &th : threads) {
+        if (th.joinable())
+            th.join();
+    }
+}
+
+int main( int argc, char **argv) {
+    
 
 //    dic.startIntoThreads("Dictionary.txt", 1);
     
-    for (int i = 1; i <= 8; i++)
-        printAllKLengthRec(set, "", k, i);
+    exo2();
     return 0;
 }
